@@ -13,18 +13,21 @@ Category.hasMany(Product, {
   foreignKey: 'category_id',
   onDelete: 'CASCADE',
 })
+
 // Products belongToMany Tags (through ProductTag)
 Product.belongsToMany(Tag, {
-  through: {
-    model: ProductTag,
-  }
-})
+  through: ProductTag,
+  foreignKey: 'product_id',
+  as: "products",
+  onDelete: 'CASCADE',
+});
+
 // Tags belongToMany Products (through ProductTag)
 Tag.belongsToMany(Product, {
-  through: {
-    model: ProductTag,
-  }
-})
+  through: ProductTag,
+  foreignKey: 'tag_id',
+  onDelete: 'CASCADE'
+});
 
 module.exports = {
   Product,
